@@ -1,0 +1,6 @@
+@import "@/styles/theme";
+
+.container {
+	@include width-height(100%, 100%);
+	@include flex(column, center, center);
+}

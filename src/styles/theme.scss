@@ -1,0 +1,180 @@
+// Backgrounds
+$background: #f4f5ff;
+
+// Global colors
+$blue: #3e4095;
+$lightBlue: #c9caff;
+$brigthBlue: #4285f4;
+$violet: #f5f2ff;
+$orange: #ff5722;
+$lightOrange: #ffb199;
+$purple: #8b4cbd;
+$green: #34a853;
+$grey: #f1f1f1;
+
+$errorColor: #d10707;
+$text: #575757;
+
+$lightGrey: #858796;
+$darkGrey: #505050;
+
+$black: #000;
+$white: #fff;
+
+// Toast
+$blue: #3d4196;
+$red: #d10707;
+
+//Mixins
+@mixin flex($direction, $justify, $align, $gap: 0) {
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $justify;
+	align-items: $align;
+	gap: $gap;
+}
+@mixin width-height($width, $height) {
+	width: $width;
+	height: $height;
+}
+@mixin fontSize-fontWeight($size, $weight) {
+	font-size: $size;
+	font-weight: $weight;
+}
+
+/* Inputs */
+@mixin label() {
+	@include width-height(100%, auto);
+	@include flex(column, center, flex-start, 10px);
+	@include fontSize-fontWeight(14px, 400);
+	color: $text;
+}
+@mixin input() {
+	@include width-height(100%, auto);
+	border: 1px solid $text;
+	color: $text;
+	@include fontSize-fontWeight(14px, 400);
+	padding: 10px 10px 10px 20px;
+	border-radius: 4px;
+	&:focus {
+		outline: none;
+		border: 1px solid $blue;
+	}
+}
+@mixin textarea($height) {
+	@include width-height(100%, $height);
+	border: 1px solid $text;
+	color: $text;
+	@include fontSize-fontWeight(14px, 400);
+	padding: 10px 10px 10px 20px;
+	border-radius: 4px;
+	resize: none;
+	&:focus {
+		outline: none;
+		border: 1px solid $blue;
+	}
+}
+
+@mixin popup-confirm() {
+	cursor: pointer;
+	border: none;
+	color: $white;
+	background: $blue;
+	padding: 7px 15px;
+	border-radius: 4px;
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+	transition: all 200ms ease-in-out;
+	&:hover {
+		color: $white;
+		background: #5c5eca;
+	}
+}
+
+@mixin popup-cancel() {
+	cursor: pointer;
+	border: none;
+	color: $errorColor;
+	background: $white;
+	padding: 7px 15px;
+	border-radius: 4px;
+	transition: all 200ms ease-in-out;
+	&:hover {
+		color: $white;
+		background: $errorColor;
+	}
+}
+
+/* Buttons */
+@mixin main-btn() {
+	@include fontSize-fontWeight(14px, 400);
+	height: fit-content;
+	padding: 12px 22px;
+	border: none;
+	border-radius: 4px;
+	background: $blue;
+	color: $white;
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+	transition: background 200ms ease-in;
+	&:hover {
+		background: #5c5eca;
+	}
+}
+@mixin second-btn {
+	height: fit-content;
+	padding: 12px 22px;
+	@include flex(row, center, center, 5px);
+	@include fontSize-fontWeight(16px, 400);
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+	padding: 10px;
+	border-radius: 4px;
+	border: 0.5px solid $lightGrey;
+	color: $lightGrey;
+	background: #fff;
+	cursor: pointer;
+	transition: border 200ms ease-in;
+	&:hover {
+		border: 1px solid $blue;
+	}
+}
+@mixin third-btn {
+	height: fit-content;
+	@include fontSize-fontWeight(16px, 400);
+	@include flex(row, center, center, 5px);
+	color: $text;
+	border: 2px solid $blue;
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+	padding: 12px 22px;
+	border-radius: 4px;
+	cursor: pointer;
+	background: none;
+	transition: all 0.7s;
+	&:hover {
+		color: $white;
+		background-color: $blue;
+	}
+	outline: none;
+	font-family: inherit;
+}
+@mixin create-btn() {
+	@include fontSize-fontWeight(14px, 400);
+	height: fit-content;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 4px;
+	background: $blue;
+	color: $white;
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+	transition: background 200ms ease-in;
+	&:hover {
+		background: #5c5eca;
+	}
+}
+@mixin input_popup() {
+	padding: 8px 18px;
+	border-radius: 8px;
+	border: 1px solid $lightBlue;
+	outline: none;
+	color: $text;
+}

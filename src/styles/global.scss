@@ -1,0 +1,57 @@
+@import "@/styles/theme.scss";
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	scroll-behavior: smooth;
+	scrollbar-color: #5551f3 #d9d9d9;
+	scrollbar-width: thin;
+}
+
+button {
+	&:focus {
+		outline: none;
+	}
+}
+
+/* Remove built-in form typography styles */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+/* Toast  */
+
+.toastUpdateBody {
+	font-size: 16px;
+}
+
+.toastOk {
+	background-color: $blue;
+	color: white;
+	font-size: 16px;
+}
+
+.toastBad {
+	background-color: $errorColor;
+	color: white;
+}

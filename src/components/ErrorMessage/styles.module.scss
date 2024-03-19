@@ -1,0 +1,13 @@
+@import "@/styles/theme.scss";
+
+.container {
+	@include width-height(100%, 100%);
+	@include flex(column, center, center, 20px);
+	p {
+		@include fontSize-fontWeight(20px, 400);
+		color: $grey;
+	}
+	button {
+		@include main-btn();
+	}
+}

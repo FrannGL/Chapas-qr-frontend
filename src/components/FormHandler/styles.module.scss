@@ -1,0 +1,48 @@
+@import "@/styles/theme.scss";
+
+.container {
+	@include width-height(100%, auto);
+	@include flex(column, center, center, 50px);
+	.form {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+		.label_container {
+			@include flex(column, center, flex-start);
+			input {
+				@include width-height(100%, auto);
+				padding: 5px;
+				outline: none;
+				border: 1px solid $lightGrey;
+				border-radius: 5px;
+			}
+			input[type="number"]::-webkit-inner-spin-button,
+			input[type="number"]::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				appearance: none;
+				margin: 0;
+			}
+		}
+		.file_container {
+			@include flex(column, center, flex-start);
+		}
+	}
+	.btn_container {
+		@include flex(row, center, center, 20px);
+		.btn {
+			@include main-btn;
+			background: none;
+			border: 1px solid $errorColor;
+			color: $errorColor;
+			&:hover {
+				background: $errorColor;
+				color: $white;
+			}
+			&:nth-child(2) {
+				@include main-btn;
+			}
+		}
+	}
+}

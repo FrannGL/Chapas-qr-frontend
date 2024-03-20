@@ -4,10 +4,11 @@ import styles from "./styles.module.scss";
 import { useEffect, useState } from "react";
 import Popup from "@/components/Popup";
 import FormHandler from "@/components/FormHandler";
-import { get } from "@/services/fetch";
+import { get } from "@/app/api/route";
 
 const HomePage = () => {
 	const [addPopup, setAddPopup] = useState(false);
+	const [users, setUsers] = useState([]);
 
 	const handleClickAdd = () => {
 		setAddPopup(true);
@@ -24,8 +25,11 @@ const HomePage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const data = await get("");
-				console.log(data);
+				const data = await get("users");
+				if (data.statusCode === 200) {
+					console.log(data);
+					setUsers(data.payload);
+				}
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			}
@@ -47,6 +51,14 @@ const HomePage = () => {
 					<FormHandler setAddPopup={setAddPopup} />
 				</Popup>
 			)}
+			<div className={styles.users}>
+				{/* {users.map((user: any) => (
+					<div key={user.id} className={styles.user}>
+						<p>{user.name}</p>
+						<p>{user.owner}</p>
+					</div>
+				))} */}
+			</div>
 		</section>
 	);
 };

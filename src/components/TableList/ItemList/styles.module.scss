@@ -1,0 +1,39 @@
+@import "@/styles/theme.scss";
+
+.body {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	justify-content: center;
+	align-items: center;
+	padding: 10px 20px;
+	gap: 30px;
+	border-bottom: 2px solid rgb(218, 217, 217);
+	.data_header {
+		@include fontSize-fontWeight(16px, 600);
+		color: $darkGrey;
+	}
+	.data {
+		@include fontSize-fontWeight(14px, 500);
+		color: $darkGrey;
+	}
+	.actions {
+		@include flex(row, flex-start, center, 20px);
+		.btn {
+			border: none;
+			outline: none;
+			background: none;
+			cursor: pointer;
+			transition: all 200ms ease-in-out;
+			&:hover {
+				transform: scale(1.2);
+			}
+			svg {
+				@include width-height(25px, auto);
+				transition: all 150ms ease-in-out;
+				&:hover {
+					fill: $lightBlue;
+				}
+			}
+		}
+	}
+}

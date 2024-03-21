@@ -77,7 +77,7 @@ export const update = async (url: string, id: string, data?: any) => {
 export const remove = async (url: string, id: string) => {
   try {
     const response = await axios.delete(`${API}/${url}/${id}`);
-    return response.data.data;
+    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return error.response;

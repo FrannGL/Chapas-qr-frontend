@@ -1,0 +1,34 @@
+@import "@/styles/theme.scss";
+
+.container {
+  @include width-height(100%, 100vh);
+  @include flex(column, center, center);
+  flex-wrap: nowrap;
+  overflow: hidden;
+  background: $violet;
+  .inner_container {
+    @include width-height(100%, 100%);
+    @include flex(row, center, center);
+    .children_container {
+      @include flex(row, center, center);
+      @include width-height(100%, 100%);
+      overflow-y: auto;
+    }
+  }
+  .isOpen {
+    @include width-height(100%, 100%);
+    @include flex(row, center, center);
+    transform: translateX(300px);
+    padding-right: 300px; /* <---- PARA CENTRAR EL CONTENIDO. REVISAR CUANDO HAYA CONTENIDO. */
+  }
+}
+
+.children_container::-webkit-scrollbar {
+  width: 10px;
+  background-color: $lightGrey;
+}
+
+.children_container::-webkit-scrollbar-thumb {
+  background-color: $blue;
+  border-radius: 10px;
+}

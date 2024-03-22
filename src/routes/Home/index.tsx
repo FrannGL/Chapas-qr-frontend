@@ -3,37 +3,36 @@ import styles from "./styles.module.scss";
 import { useEffect, useState } from "react";
 import { get } from "@/app/api/route";
 import TableList from "@/components/TableList";
+import { setUserData } from "@/store/features/userSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 const HomePage = () => {
 	const [loading, setLoading] = useState<boolean>(false);
-	const [users, setUsers] = useState([]);
+	const dispatch = useAppDispatch();
+
+	const fetchData = async () => {
+		setLoading(true);
+		try {
+			const data = await get("users");
+			if (data.statusCode === 200) {
+				dispatch(setUserData(data.payload));
+				setLoading(false);
+			}
+		} catch (error) {
+			console.error("Error fetching data:", error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const data = await get("users");
-				if (data.statusCode === 200) {
-					console.log(data);
-					setUsers(data.payload);
-				}
-			} catch (error) {
-				console.error("Error fetching data:", error);
-			}
-		};
-
 		fetchData();
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<section className={styles.container}>
 			<div className={styles.users}>
-				{/* {users.map((user: any) => (
-					<div key={user.id} className={styles.user}>
-						<p>{user.name}</p>
-						<p>{user.owner}</p>
-					</div>
-				))} */}
-				<TableList loading={loading} users={users} />
+				<TableList loading={loading} fetchData={fetchData} />
 			</div>
 		</section>
 	);

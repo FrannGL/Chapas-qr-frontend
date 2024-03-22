@@ -2,6 +2,7 @@ import styles from "./styles.module.scss";
 import Pencil from "../../../../public/icons/pencil";
 import Delete from "../../../../public/icons/delete";
 import { UserProps } from "@/typescript/users.interface";
+import Image from "next/image";
 
 interface ItemListProps {
 	item: UserProps;
@@ -20,7 +21,7 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 
 	return (
 		<div className={styles.body}>
-			<p className={styles.data}>{item._id}</p>
+			<Image src={item.image} alt={item.name} priority width={80} height={80} className={styles.image} />
 			<p className={styles.data}>{item.name}</p>
 			<p className={styles.data}>{item.weight}</p>
 			<p className={styles.data}>{item.birthday}</p>

@@ -3,7 +3,7 @@ import stylesBody from "../ItemList/styles.module.scss";
 const HeaderAgent = () => {
 	return (
 		<div className={stylesBody.body}>
-			<p className={stylesBody.data_header}>ID</p>
+			<p className={stylesBody.data_header}>Avatar</p>
 			<p className={stylesBody.data_header}>Nombre</p>
 			<p className={stylesBody.data_header}>Peso</p>
 			<p className={stylesBody.data_header}>Cumpleaños</p>

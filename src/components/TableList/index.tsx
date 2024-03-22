@@ -3,15 +3,16 @@ import ItemList from "./ItemList";
 import LoadingMsg from "@/components/Loading";
 import HeaderAgent from "./HeaderList/HeaderAgent";
 import { useState, useEffect } from "react";
-import { UserProps } from "@/typescript/users.interface";
+import { useAppSelector } from "@/store/hooks";
 
 interface TableProps {
 	loading: Boolean;
-	users: UserProps[];
+	fetchData: () => void;
 }
 
-const TableList = ({ loading, users }: TableProps) => {
+const TableList = ({ loading, fetchData }: TableProps) => {
 	const [userId, setUserId] = useState<string | null>(null);
+	const userData = useAppSelector(state => state.userData);
 
 	const handleEditUser = (id: string) => {
 		setUserId(id);
@@ -35,8 +36,12 @@ const TableList = ({ loading, users }: TableProps) => {
 			<div className={styles.content}>
 				{loading ? (
 					<LoadingMsg />
-				) : users.length >= 1 ? (
-					users.map(user => <ItemList key={user._id} item={user} onEdit={handleEditUser} onDelete={handleDeleteUser} />)
+				) : userData.length > 0 ? (
+					userData.map(user => (
+						<>
+							<ItemList key={user._id} item={user} onEdit={handleEditUser} onDelete={handleDeleteUser} />
+						</>
+					))
 				) : (
 					<p className={styles.text}>Aún no hay usuarios</p>
 				)}

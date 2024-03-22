@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { MenuItem } from "../MenuItem";
 import { useState } from "react";
 import Popup from "@/components/Popup";
-import FormHandler from "@/components/FormHandler";
+import FormAdd from "@/components/FormAdd";
 import { ButtonProps } from "@/components/Button";
 import Addition from "../../../../public/icons/addition";
 import Delete from "../../../../public/icons/delete";
@@ -85,7 +85,7 @@ export const Navigation = ({ isOpen }: any) => {
 					setShowConfirmation={setAddPopup}
 					title={"Agregar usuario"}
 				>
-					<FormHandler setAddPopup={setAddPopup} />
+					<FormAdd setAddPopup={setAddPopup} />
 				</Popup>
 			)}
 		</motion.ul>

@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["chapas-qr-avatars.s3.us-east-2.amazonaws.com"],
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "chapas-qr-avatars.s3.us-east-2.amazonaws.com",
+			},
+		],
 	},
 };
 

@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import styles from "./styles.module.scss";
 import { post } from "@/app/api/route";
-import { useState } from "react";
+import { useMessageToast } from "@/hooks/useMessageToast";
 import { validationSchema } from "./validationSchema";
+import useFetchUsers from "@/hooks/useFetchUsers";
 
 interface UserFormData {
 	name: string;
@@ -27,7 +28,8 @@ const initialValues: UserFormData = {
 };
 
 const FormAdd = ({ setAddPopup }: FormHandlerProps) => {
-	const [image, setImage] = useState<File | null>(null);
+	const { notify, notifyError } = useMessageToast();
+	const { fetchData } = useFetchUsers();
 	const { values, handleBlur, handleChange, handleSubmit, setFieldValue, errors } = useFormik({
 		initialValues: initialValues,
 		validationSchema: validationSchema,
@@ -44,7 +46,14 @@ const FormAdd = ({ setAddPopup }: FormHandlerProps) => {
 				formData.append("whatsappNumber", formValues.whatsappNumber);
 
 				const response = await post("users", formData);
-				console.log("Response:", response);
+				if (response.statusCode === 201) {
+					setAddPopup(false);
+					resetForm();
+					notify("Usuario creado correctamente");
+					fetchData();
+				} else {
+					notifyError("Error al crear al usuario");
+				}
 			} catch (error) {
 				console.error("Error:", error);
 			}

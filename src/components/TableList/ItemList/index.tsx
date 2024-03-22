@@ -21,7 +21,7 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 
 	return (
 		<div className={styles.body}>
-			<Image src={item.image} alt={item.name} priority width={80} height={80} className={styles.image} />
+			<Image src={item.image && item.image} alt={item.name} priority width={80} height={80} className={styles.image} />
 			<p className={styles.data}>{item.name}</p>
 			<p className={styles.data}>{item.weight}</p>
 			<p className={styles.data}>{item.birthday}</p>

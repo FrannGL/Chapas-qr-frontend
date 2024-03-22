@@ -10,6 +10,8 @@
 		justify-content: center;
 		align-items: center;
 		gap: 20px;
+		position: relative;
+		padding-bottom: 70px;
 		.label_container {
 			@include flex(column, center, flex-start);
 			input {
@@ -35,22 +37,24 @@
 				color: red;
 			}
 		}
-	}
-	.btn_container {
-		@include width-height(100%, 100px);
-		@include flex(row, center, center, 20px);
-		.btn {
-			@include main-btn;
-			width: 200px;
-			background: none;
-			border: 1px solid $errorColor;
-			color: $errorColor;
-			&:hover {
-				background: $errorColor;
-				color: $white;
-			}
-			&:nth-child(2) {
+		.btn_container {
+			@include width-height(100%, auto);
+			@include flex(row, center, center, 20px);
+			position: absolute;
+			bottom: 0;
+			.btn {
 				@include main-btn;
+				width: 200px;
+				background: none;
+				border: 1px solid $errorColor;
+				color: $errorColor;
+				&:hover {
+					background: $errorColor;
+					color: $white;
+				}
+				&:nth-child(2) {
+					@include main-btn;
+				}
 			}
 		}
 	}

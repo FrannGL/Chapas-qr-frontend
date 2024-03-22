@@ -7,10 +7,11 @@ import { ButtonProps } from "@/components/Button";
 import Addition from "../../../../public/icons/addition";
 import Delete from "../../../../public/icons/delete";
 import Pencil from "../../../../public/icons/pencil";
-import { remove } from "@/app/api/route";
+import FormEdit from "@/components/FormEdit";
 
 export const Navigation = ({ isOpen }: any) => {
 	const [addPopup, setAddPopup] = useState(false);
+	const [editPopup, setEditPopup] = useState(false);
 
 	const variants = {
 		open: {
@@ -53,7 +54,7 @@ export const Navigation = ({ isOpen }: any) => {
 	};
 
 	const handleEdit = () => {
-		console.log("edit");
+		setEditPopup(true);
 	};
 
 	const handleDelete = async () => {
@@ -86,6 +87,16 @@ export const Navigation = ({ isOpen }: any) => {
 					title={"Agregar usuario"}
 				>
 					<FormAdd setAddPopup={setAddPopup} />
+				</Popup>
+			)}
+			{editPopup && (
+				<Popup
+					onConfirm={handleCreate}
+					onCancel={handleCloseModal}
+					setShowConfirmation={setEditPopup}
+					title={"Editar usuario"}
+				>
+					<FormEdit setEditPopup={setEditPopup} />
 				</Popup>
 			)}
 		</motion.ul>

@@ -1,6 +1,9 @@
 @import "@/styles/theme";
 
-// .container {
-// 	@include width-height(100%, 100%);
-// 	@include flex(column, center, center);
-// }
+.container {
+	@include width-height(100%, auto);
+	@include flex(column, center, center);
+	.users {
+		@include flex(column, center, center, 30px);
+	}
+}

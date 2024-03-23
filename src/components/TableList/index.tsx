@@ -7,13 +7,16 @@ import { useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import { useMessageToast } from "@/hooks/useMessageToast";
 import { remove } from "@/app/api/route";
+import { UserProps } from "@/typescript/users.interface";
 
 interface TableProps {
 	loading: Boolean;
 	fetchData: () => void;
+	filteredUsers: (users: UserProps[], searchTerm: string) => UserProps[];
+	searchTerm: string;
 }
 
-const TableList = ({ loading, fetchData }: TableProps) => {
+const TableList = ({ loading, fetchData, filteredUsers, searchTerm }: TableProps) => {
 	const [userId, setUserId] = useState<string | null>(null);
 	const [showPopup, setShowPopup] = useState(false);
 	const { notify, notifyError } = useMessageToast();
@@ -51,6 +54,8 @@ const TableList = ({ loading, fetchData }: TableProps) => {
 		setShowPopup(false);
 	};
 
+	const filteredUserData = filteredUsers(userData, searchTerm);
+
 	return (
 		<section className={styles.container}>
 			<div className={styles.head}>
@@ -62,8 +67,8 @@ const TableList = ({ loading, fetchData }: TableProps) => {
 			<div className={styles.content}>
 				{loading ? (
 					<LoadingMsg />
-				) : userData.length > 0 ? (
-					userData.map(user => (
+				) : filteredUserData.length > 0 ? (
+					filteredUserData.map(user => (
 						<ItemList
 							key={user._id}
 							item={user}
@@ -75,7 +80,7 @@ const TableList = ({ loading, fetchData }: TableProps) => {
 						/>
 					))
 				) : (
-					<p className={styles.text}>Aún no hay usuarios</p>
+					<p className={styles.text}>No se encontraron usuarios</p>
 				)}
 			</div>
 			{showPopup && (

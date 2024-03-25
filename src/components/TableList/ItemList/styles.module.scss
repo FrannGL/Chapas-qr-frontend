@@ -1,20 +1,32 @@
 @import "@/styles/theme.scss";
 
 .body {
+	@include width-height(auto, auto);
 	display: grid;
-	grid-template-columns: repeat(7, 1fr);
+	grid-template-columns: repeat(7, 130px);
 	justify-content: center;
 	align-items: center;
 	padding: 10px 20px;
-	gap: 30px;
+	gap: 10px;
 	border-bottom: 2px solid rgb(218, 217, 217);
+	.image {
+		@include width-height(60px, 60px);
+		border-radius: 100px;
+		object-fit: cover;
+	}
+
 	.data_header {
 		@include fontSize-fontWeight(16px, 600);
 		color: $darkGrey;
 	}
 	.data {
+		@include flex(row, flex-start, center, 5px);
 		@include fontSize-fontWeight(14px, 500);
 		color: $darkGrey;
+		.wp {
+			@include width-height(20px, 20px);
+			object-fit: contain;
+		}
 	}
 	.actions {
 		@include flex(row, flex-start, center, 20px);

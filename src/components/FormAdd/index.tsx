@@ -4,10 +4,11 @@ import { post } from "@/app/api/route";
 import { useMessageToast } from "@/hooks/useMessageToast";
 import { validationSchema } from "./validationSchema";
 import useFetchUsers from "@/hooks/useFetchUsers";
+import FileDragDrop from "./FileDragDrop";
 
 interface UserFormData {
 	name: string;
-	image: FileList | null;
+	image: File | null;
 	weight: string;
 	birthday: string;
 	owner: string;
@@ -37,8 +38,8 @@ const FormAdd = ({ setAddPopup }: FormHandlerProps) => {
 			try {
 				const formData = new FormData();
 				formData.append("name", formValues.name);
-				if (formValues.image?.length) {
-					formData.append("image", formValues.image[0]);
+				if (formValues.image) {
+					formData.append("image", formValues.image);
 				}
 				formData.append("weight", formValues.weight);
 				formData.append("birthday", formValues.birthday);
@@ -60,26 +61,20 @@ const FormAdd = ({ setAddPopup }: FormHandlerProps) => {
 		},
 	});
 
-	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const files: FileList | null = e.target.files;
-		setFieldValue("image", files);
-	};
-
 	return (
-		<div className={styles.container}>
-			<form className={styles.form} onSubmit={handleSubmit}>
+		<form className={styles.form} onSubmit={handleSubmit}>
+			<div className={styles.avatar_container}>
+				<p className={styles.avatar_text}>Avatar</p>
+				<FileDragDrop setFieldValue={setFieldValue} />
+			</div>
+			<div className={styles.inputs_text}>
 				<div className={styles.label_container}>
-					<label htmlFor='name'>Name:</label>
+					<label htmlFor='name'>Name</label>
 					<input type='text' id='name' name='name' onBlur={handleBlur} onChange={handleChange} value={values.name} />
 					{errors.name && <p className={styles.error}>{errors.name}</p>}
 				</div>
-				<div className={styles.file_container}>
-					<label htmlFor='image'>Imagen:</label>
-					<input type='file' id='image' name='image' onBlur={handleBlur} onChange={handleFileChange} />
-					{errors.image && <p className={styles.error}>{errors.image}</p>}
-				</div>
 				<div className={styles.label_container}>
-					<label htmlFor='weight'>Weight:</label>
+					<label htmlFor='weight'>Weight</label>
 					<input
 						type='text'
 						id='weight'
@@ -91,7 +86,7 @@ const FormAdd = ({ setAddPopup }: FormHandlerProps) => {
 					{errors.weight && <p className={styles.error}>{errors.weight}</p>}
 				</div>
 				<div className={styles.label_container}>
-					<label htmlFor='birthday'>Date of Birth:</label>
+					<label htmlFor='birthday'>Date of Birth</label>
 					<input
 						type='text'
 						id='birthday'
@@ -103,12 +98,12 @@ const FormAdd = ({ setAddPopup }: FormHandlerProps) => {
 					{errors.birthday && <p className={styles.error}>{errors.birthday}</p>}
 				</div>
 				<div className={styles.label_container}>
-					<label htmlFor='owner'>Owner:</label>
+					<label htmlFor='owner'>Owner</label>
 					<input type='text' id='owner' name='owner' onBlur={handleBlur} onChange={handleChange} value={values.owner} />
 					{errors.owner && <p className={styles.error}>{errors.owner}</p>}
 				</div>
 				<div className={styles.label_container}>
-					<label htmlFor='whatsappNumber'>WhatsApp Number:</label>
+					<label htmlFor='whatsappNumber'>WhatsApp Number</label>
 					<input
 						type='text'
 						id='whatsappNumber'
@@ -119,16 +114,16 @@ const FormAdd = ({ setAddPopup }: FormHandlerProps) => {
 					/>
 					{errors.whatsappNumber && <p className={styles.error}>{errors.whatsappNumber}</p>}
 				</div>
-				<div className={styles.btn_container}>
-					<button className={styles.btn} onClick={() => setAddPopup(false)}>
-						CANCEL
-					</button>
-					<button type='submit' className={styles.btn}>
-						CREATE USER
-					</button>
-				</div>
-			</form>
-		</div>
+			</div>
+			<div className={styles.btn_container}>
+				<button className={styles.btn} onClick={() => setAddPopup(false)}>
+					CANCEL
+				</button>
+				<button type='submit' className={styles.btn}>
+					CREATE USER
+				</button>
+			</div>
+		</form>
 	);
 };
 

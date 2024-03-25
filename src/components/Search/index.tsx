@@ -1,5 +1,5 @@
-import styles from "./styles.module.scss";
 import { ChangeEvent } from "react";
+import styles from "./styles.module.scss";
 
 interface SearchProps {
 	setSearchTerm: (term: string) => void;
@@ -7,14 +7,19 @@ interface SearchProps {
 
 const Search = ({ setSearchTerm }: SearchProps) => {
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setSearchTerm(e.target.value);
+		const searchTerm = e.target.value;
+		setSearchTerm(searchTerm);
 	};
 
 	return (
 		<section className={styles.container}>
-			<input type='text' placeholder='Buscar por nombre o por dueño ...' onChange={handleChange} className={styles.input} />
+			<input
+				type='text'
+				placeholder='Buscar por nombre o por dueño ...'
+				onChange={handleChange}
+				className={styles.input}
+			/>
 		</section>
 	);
 };
-
 export default Search;

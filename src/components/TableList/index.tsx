@@ -7,20 +7,18 @@ import { useState } from "react";
 import { useAppSelector } from "@/store/hooks";
 import { useMessageToast } from "@/hooks/useMessageToast";
 import { remove } from "@/app/api/route";
-import { UserProps } from "@/typescript/users.interface";
 
 interface TableProps {
 	loading: Boolean;
 	fetchData: () => void;
-	filteredUsers: (users: UserProps[], searchTerm: string) => UserProps[];
 	searchTerm: string;
 }
 
-const TableList = ({ loading, fetchData, filteredUsers, searchTerm }: TableProps) => {
+const TableList = ({ loading, fetchData, searchTerm }: TableProps) => {
+	const users = useAppSelector(state => state.userData);
 	const [userId, setUserId] = useState<string | null>(null);
 	const [showPopup, setShowPopup] = useState(false);
 	const { notify, notifyError } = useMessageToast();
-	const userData = useAppSelector(state => state.userData);
 
 	const handleEditUser = (id: string) => {
 		setUserId(id);
@@ -54,7 +52,7 @@ const TableList = ({ loading, fetchData, filteredUsers, searchTerm }: TableProps
 		setShowPopup(false);
 	};
 
-	const filteredUserData = filteredUsers(userData, searchTerm);
+	const filteredUsers = users.filter(user => user.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
 	return (
 		<section className={styles.container}>
@@ -67,8 +65,8 @@ const TableList = ({ loading, fetchData, filteredUsers, searchTerm }: TableProps
 			<div className={styles.content}>
 				{loading ? (
 					<LoadingMsg />
-				) : filteredUserData.length > 0 ? (
-					filteredUserData.map(user => (
+				) : filteredUsers.length > 0 ? (
+					filteredUsers.map(user => (
 						<ItemList
 							key={user._id}
 							item={user}

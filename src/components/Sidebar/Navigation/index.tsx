@@ -1,13 +1,11 @@
 import { motion } from "framer-motion";
 import { MenuItem } from "../MenuItem";
 import { useState } from "react";
-import Popup from "@/components/Popup";
-import FormAdd from "@/components/FormAdd";
+import FormActions from "@/components/FormActions";
 import { ButtonProps } from "@/components/Button";
 import Addition from "../../../../public/icons/addition";
 import Delete from "../../../../public/icons/delete";
 import Pencil from "../../../../public/icons/pencil";
-import FormEdit from "@/components/FormEdit";
 
 export const Navigation = ({ isOpen }: any) => {
 	const [addPopup, setAddPopup] = useState(false);
@@ -79,26 +77,7 @@ export const Navigation = ({ isOpen }: any) => {
 					<MenuItem key={button.id} title={button.title} icon={button.icon} onClick={button.onClick} />
 				))}
 			</motion.div>
-			{addPopup && (
-				<Popup
-					onConfirm={handleCreate}
-					onCancel={handleCloseModal}
-					setShowConfirmation={setAddPopup}
-					title={"Agregar usuario"}
-				>
-					<FormAdd setAddPopup={setAddPopup} />
-				</Popup>
-			)}
-			{editPopup && (
-				<Popup
-					onConfirm={handleCreate}
-					onCancel={handleCloseModal}
-					setShowConfirmation={setEditPopup}
-					title={"Editar usuario"}
-				>
-					<FormEdit setEditPopup={setEditPopup} />
-				</Popup>
-			)}
+			{addPopup && <FormActions setShowPopup={setAddPopup} requestType='POST' />}
 		</motion.ul>
 	);
 };

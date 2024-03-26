@@ -4,25 +4,26 @@ import LoadingMsg from "@/components/Loading";
 import HeaderAgent from "./HeaderList/HeaderAgent";
 import PopupConfirm from "../PopupConfirm";
 import { useState } from "react";
-import { useAppSelector } from "@/store/hooks";
 import { useMessageToast } from "@/hooks/useMessageToast";
 import { remove } from "@/app/api/route";
+import { UserProps } from "@/typescript/users.interface";
+import FormActions from "../FormActions";
 
 interface TableProps {
+	data: UserProps[];
 	loading: Boolean;
 	fetchData: () => void;
-	searchTerm: string;
 }
 
-const TableList = ({ loading, fetchData, searchTerm }: TableProps) => {
-	const users = useAppSelector(state => state.userData);
-	const [userId, setUserId] = useState<string | null>(null);
-	const [showPopup, setShowPopup] = useState(false);
+const TableList = ({ data, loading, fetchData }: TableProps) => {
+	const [userId, setUserId] = useState<string | undefined>(undefined);
+	const [showPopupDelete, setShowPopupDelete] = useState(false);
+	const [showPopupEdit, setShowPopupEdit] = useState(false);
 	const { notify, notifyError } = useMessageToast();
 
 	const handleEditUser = (id: string) => {
 		setUserId(id);
-		console.log(userId);
+		setShowPopupEdit(true);
 	};
 
 	const handleDeleteUser = async (id: string) => {
@@ -41,7 +42,7 @@ const TableList = ({ loading, fetchData, searchTerm }: TableProps) => {
 	const handleConfirmDelete = () => {
 		if (userId) {
 			handleDeleteUser(userId);
-			setShowPopup(false);
+			setShowPopupDelete(false);
 			notify("Usuario eliminado correctamente");
 		} else {
 			notifyError("Error al eliminar el usuario");
@@ -49,10 +50,8 @@ const TableList = ({ loading, fetchData, searchTerm }: TableProps) => {
 	};
 
 	const handleCancel = () => {
-		setShowPopup(false);
+		setShowPopupDelete(false);
 	};
-
-	const filteredUsers = users.filter(user => user.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
 	return (
 		<section className={styles.container}>
@@ -65,14 +64,14 @@ const TableList = ({ loading, fetchData, searchTerm }: TableProps) => {
 			<div className={styles.content}>
 				{loading ? (
 					<LoadingMsg />
-				) : filteredUsers.length > 0 ? (
-					filteredUsers.map(user => (
+				) : data.length > 0 ? (
+					data.map(user => (
 						<ItemList
 							key={user._id}
 							item={user}
 							onEdit={handleEditUser}
 							onDelete={() => {
-								setShowPopup(true);
+								setShowPopupDelete(true);
 								setUserId(user._id);
 							}}
 						/>
@@ -81,16 +80,17 @@ const TableList = ({ loading, fetchData, searchTerm }: TableProps) => {
 					<p className={styles.text}>No se encontraron usuarios</p>
 				)}
 			</div>
-			{showPopup && (
+			{showPopupDelete && (
 				<PopupConfirm
 					onConfirm={handleConfirmDelete}
 					onCancel={handleCancel}
-					setShowConfirmation={setShowPopup}
+					setShowConfirmation={setShowPopupDelete}
 					title={"¿Estás seguro que querés eliminar al usuario?"}
 					textCancel={"Cancelar"}
 					textAccept={"Confirmar"}
 				/>
 			)}
+			{showPopupEdit && <FormActions setShowPopup={setShowPopupEdit} userId={userId} requestType='PUT' />}
 		</section>
 	);
 };

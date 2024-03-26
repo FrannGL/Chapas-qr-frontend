@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image";
 
 export interface UserProps {
 	_id: string;
-	image: StaticImageData;
+	image: File | null;
 	name: string;
 	weight: string;
 	birthday: string;

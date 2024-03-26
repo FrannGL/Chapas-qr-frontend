@@ -14,7 +14,7 @@ export async function get (url: string) {
   }
 };
 
-export async function post(url: string, formData: FormData) {
+export async function post(url: string, formData: any) {
   try {
       const response = await axios.post(`${API}/${url}`, formData, {
           headers: {
@@ -59,10 +59,10 @@ export async function post(url: string, formData: FormData) {
 //   }
 // };
 
-export const update = async (url: string, id: string, data?: any) => {
+export const update = async (url: string,  data: any, id: string) => {
   try {
     const response = await axios.put(`${API}/${url}/${id}`, data);
-    return response.data.data;
+    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return error.response;

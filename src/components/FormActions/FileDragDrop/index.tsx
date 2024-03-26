@@ -5,10 +5,10 @@ import Image from "next/image";
 import fileImage from "/public/icons/cloud.svg";
 
 interface FileDragDropProps {
-	setFieldValue: (field: string, value: any) => void;
+	setFile: (field: string, value: any) => void;
 }
 
-const FileDragDrop = ({ setFieldValue }: FileDragDropProps) => {
+const FileDragDrop = ({ setFile }: FileDragDropProps) => {
 	const { notifyError } = useMessageToast();
 
 	const onDrop = (acceptedFiles: File[], fileRejections: any) => {
@@ -19,7 +19,7 @@ const FileDragDrop = ({ setFieldValue }: FileDragDropProps) => {
 				notifyError("Solo se permiten imágenes PNG, JPEG, JPG, WEBP");
 			}
 		} else {
-			setFieldValue("image", acceptedFiles[0]);
+			setFile("image", acceptedFiles[0]);
 		}
 	};
 

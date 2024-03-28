@@ -8,6 +8,7 @@ import Link from "next/link";
 import QRCode from "react-qr-code";
 import useFormattedDate from "@/hooks/useFormattedDate";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface ItemListProps {
 	item: UserProps;
@@ -17,6 +18,7 @@ interface ItemListProps {
 
 const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 	const [qrClicked, setQrClicked] = useState(false);
+	const router = useRouter();
 
 	const handleEditClick = () => {
 		onEdit(item._id);
@@ -36,7 +38,9 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 	return (
 		<div className={styles.body}>
 			<Image src={item.image && item.image} alt={item.name} priority width={80} height={80} className={styles.image} />
-			<p className={styles.data}>{item.name}</p>
+			<p className={`${styles.data} ${styles.name}`} onClick={() => router.push(`${item._id}`)}>
+				{item.name}
+			</p>
 			<p className={styles.data}>{item.weight}</p>
 			<p className={styles.data}>{formattedDate}</p>
 			<p className={styles.data}>{item.owner}</p>

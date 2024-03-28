@@ -3,11 +3,12 @@
 .body {
 	@include width-height(auto, auto);
 	display: grid;
-	grid-template-columns: repeat(7, 130px);
+	grid-template-columns: repeat(8, 130px);
 	justify-content: center;
 	align-items: center;
 	padding: 10px 20px;
 	gap: 10px;
+	transition: all 300ms ease-in-out;
 	border-bottom: 2px solid rgb(218, 217, 217);
 	.image {
 		@include width-height(60px, 60px);
@@ -26,6 +27,20 @@
 		.wp {
 			@include width-height(20px, 20px);
 			object-fit: contain;
+		}
+	}
+	.qr {
+		@include width-height(60px, 60px);
+		object-fit: cover;
+		transition: all 300ms ease-in-out;
+		cursor: pointer;
+		&.clicked {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 9999;
+			@include width-height(300px, 300px);
 		}
 	}
 	.actions {

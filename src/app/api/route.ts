@@ -28,40 +28,13 @@ export async function post(url: string, formData: any) {
   }
 };
 
-// export const post = async (url: string, data: any) => {
-//   try {
-//     const response = await axios.post(`${API}/${url}`, data);
-//     return response;
-//   } catch (error) {
-//     if (axios.isAxiosError(error)) {
-//       return error.response;
-//     } else {
-//       error;
-//     }
-//   }
-// };
-
-// export const postFile = async (url: string, fileData: FormData) => {
-//   try {
-//     const response = await fetch(`${API}/${url}`, {
-//       method: "POST",
-//       body: fileData,
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`Error en la solicitud: ${response.status}`);
-//     }
-
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error("Error en la solicitud:", error);
-//   }
-// };
-
-export const update = async (url: string,  data: any, id: string) => {
+export const update = async (url: string,  formData: any, id: string) => {
   try {
-    const response = await axios.put(`${API}/${url}/${id}`, data);
+    const response = await axios.put(`${API}/${url}/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+    });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

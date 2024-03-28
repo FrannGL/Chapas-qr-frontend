@@ -12,7 +12,6 @@ const FileDragDrop = ({ setFile }: FileDragDropProps) => {
 	const { notifyError } = useMessageToast();
 
 	const onDrop = (acceptedFiles: File[], fileRejections: any) => {
-		console.log(acceptedFiles[0]);
 		if (fileRejections.length) {
 			const errorCode = fileRejections[0].errors[0].code;
 			if (errorCode === "file-invalid-type") {

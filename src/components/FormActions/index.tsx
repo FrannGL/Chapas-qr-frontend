@@ -7,6 +7,8 @@ import { ChangeEvent, SetStateAction, useEffect, useState } from "react";
 import { UserProps } from "@/typescript/users.interface";
 import { useAppSelector } from "@/store/hooks";
 import { useCloseDropdown } from "@/hooks/useCloseDropdown";
+import Image from "next/image";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 interface FormActionsProps {
 	setShowPopup: (value: SetStateAction<boolean>) => void;
@@ -16,6 +18,7 @@ interface FormActionsProps {
 const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) => {
 	const { dropdownRef } = useCloseDropdown(setShowPopup);
 	const users = useAppSelector(state => state.userData);
+	const [image, setImage] = useState<string | StaticImport>("");
 	const { notify, notifyError } = useMessageToast();
 	const { fetchData } = useFetchUsers();
 	const [formData, setFormData] = useState<UserProps>({
@@ -40,6 +43,11 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 				owner: foundClient.owner,
 				whatsappNumber: foundClient.whatsappNumber,
 			});
+		} else {
+			// if (formData.image) {
+			// 	const imageUrl = URL.createObjectURL(formData.image);
+			// 	setImage(imageUrl);
+			// }
 		}
 	}, [users, requestType, userId]);
 
@@ -119,6 +127,17 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<div className={styles.avatar_container}>
 						<p className={styles.avatar_text}>Avatar</p>
+						<p className={styles.avatar_name}>{formData.image ? formData.image.name : ""}</p>
+						{image && <Image src={image} className={styles.avatar} alt='avatar' width={100} height={100} />}
+						{formData.image && !image && (
+							<Image
+								src={formData.image instanceof File ? URL.createObjectURL(formData.image) : formData.image}
+								className={styles.avatar}
+								alt='avatar'
+								width={100}
+								height={100}
+							/>
+						)}
 						<FileDragDrop setFile={handleSetFile} />
 					</div>
 					<div className={styles.inputs_text}>

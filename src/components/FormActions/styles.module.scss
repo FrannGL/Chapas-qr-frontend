@@ -30,6 +30,14 @@
 				.avatar_text {
 					color: $darkGrey;
 				}
+				.avatar_name {
+					@include fontSize-fontWeight(14px, 400);
+				}
+				.avatar {
+					@include width-height(100px, 100px);
+					border-radius: 100px;
+					object-fit: cover;
+				}
 			}
 			.inputs_text {
 				display: grid;

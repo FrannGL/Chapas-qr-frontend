@@ -9,6 +9,7 @@ const HeaderAgent = () => {
 			<p className={stylesBody.data_header}>Cumpleaños</p>
 			<p className={stylesBody.data_header}>Dueño</p>
 			<p className={stylesBody.data_header}>Whatsapp</p>
+			<p className={stylesBody.data_header}>QR Code</p>
 			<p className={stylesBody.data_header}>Actions</p>
 		</div>
 	);

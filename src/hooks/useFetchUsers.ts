@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { get } from "@/app/api/route";
 import { setUserData } from "@/store/features/userSlice";
 import { useAppDispatch } from "@/store/hooks";
@@ -7,7 +7,7 @@ const useFetchUsers = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         setLoading(true);
         try {
             const data = await get("users");
@@ -19,11 +19,11 @@ const useFetchUsers = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [dispatch]);
 
     useEffect(() => {
         fetchData();
-    }, [dispatch]);
+    }, [fetchData]);
 
     return { loading, fetchData };
 };

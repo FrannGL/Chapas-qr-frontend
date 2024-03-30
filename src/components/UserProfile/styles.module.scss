@@ -1,0 +1,59 @@
+@import "@/styles/theme.scss";
+
+.container {
+	@include width-height(100%, 100%);
+	@include flex(column, flex-start, center, 85px);
+	.header {
+		@include width-height(100%, 150px);
+		@include flex(row, center, center);
+		background: $blue;
+		position: relative;
+		.img {
+			@include width-height(200px, 200px);
+			object-fit: cover;
+			border-radius: 80px;
+			position: absolute;
+			bottom: -70px;
+			box-shadow: 4px 10px 10px 0 rgba(0, 0, 0, 0.25);
+		}
+	}
+	.contact {
+		@include width-height(100%, auto);
+		@include flex(column, center, center, 20px);
+		.name {
+			@include flex(column, center, center);
+			@include fontSize-fontWeight(15px, 400);
+			span {
+				@include fontSize-fontWeight(18px, 600);
+			}
+		}
+		.btn {
+			@include width-height(55%, auto);
+			@include flex(row, center, center, 10px);
+			border: none;
+			background: none;
+			outline: none;
+			background: $black;
+			color: white;
+			border-radius: 20px;
+			padding: 7px;
+			.wp {
+				@include width-height(20px, auto);
+			}
+		}
+	}
+	.info {
+		@include width-height(100%, auto);
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+		padding: 10px 20px;
+		p {
+			@include flex(column, center, flex-start, 10px);
+			@include fontSize-fontWeight(15px, 300);
+			span {
+				@include fontSize-fontWeight(18px, 500);
+			}
+		}
+	}
+}

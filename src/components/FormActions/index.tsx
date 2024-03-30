@@ -24,6 +24,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 	const [formData, setFormData] = useState<UserProps>({
 		_id: "",
 		name: "",
+		race: "",
 		image: null,
 		weight: "",
 		birthday: "",
@@ -37,6 +38,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 			setFormData({
 				_id: foundClient._id,
 				name: foundClient.name,
+				race: foundClient.race,
 				image: foundClient.image,
 				weight: foundClient.weight,
 				birthday: foundClient.birthday,
@@ -77,6 +79,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 				setFormData({
 					_id: "",
 					name: "",
+					race: "",
 					image: null,
 					weight: "",
 					birthday: "",
@@ -102,6 +105,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 					setFormData({
 						_id: userId,
 						name: "",
+						race: "",
 						image: null,
 						weight: "",
 						birthday: "",
@@ -142,23 +146,27 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 					</div>
 					<div className={styles.inputs_text}>
 						<div className={styles.label_container}>
-							<label htmlFor='name'>Name</label>
+							<label htmlFor='name'>Nombre</label>
 							<input type='text' id='name' name='name' onChange={handleChange} value={formData.name} />
 						</div>
 						<div className={styles.label_container}>
-							<label htmlFor='weight'>Weight</label>
+							<label htmlFor='race'>Raza</label>
+							<input type='text' id='race' name='race' onChange={handleChange} value={formData.race} />
+						</div>
+						<div className={styles.label_container}>
+							<label htmlFor='weight'>Peso</label>
 							<input type='text' id='weight' name='weight' onChange={handleChange} value={formData.weight} />
 						</div>
 						<div className={styles.label_container}>
-							<label htmlFor='birthday'>Date of Birth</label>
+							<label htmlFor='birthday'>Fecha de nacimiento</label>
 							<input type='text' id='birthday' name='birthday' onChange={handleChange} value={formData.birthday} />
 						</div>
 						<div className={styles.label_container}>
-							<label htmlFor='owner'>Owner</label>
+							<label htmlFor='owner'>Dueño</label>
 							<input type='text' id='owner' name='owner' onChange={handleChange} value={formData.owner} />
 						</div>
 						<div className={styles.label_container}>
-							<label htmlFor='whatsappNumber'>WhatsApp Number</label>
+							<label htmlFor='whatsappNumber'>Número de Whatsapp</label>
 							<input
 								type='text'
 								id='whatsappNumber'
@@ -170,10 +178,10 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 					</div>
 					<div className={styles.btn_container}>
 						<button className={styles.btn} onClick={() => setShowPopup(false)}>
-							CANCEL
+							CANCELAR
 						</button>
 						<button type='submit' className={styles.btn}>
-							CREATE USER
+							CREAR USUARIO
 						</button>
 					</div>
 				</form>

@@ -6,7 +6,7 @@ import { UserProps } from "@/typescript/users.interface";
 import Image from "next/image";
 import Link from "next/link";
 import QRCode from "react-qr-code";
-import useFormattedDate from "@/hooks/useFormattedDate";
+import { formatBirthday } from "@/utils/formatBirtday";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -32,23 +32,21 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 		setQrClicked(!qrClicked);
 	};
 
-	const userObjetc = JSON.stringify(item);
-	const formattedDate = useFormattedDate(item.birthday);
-
 	return (
 		<div className={styles.body}>
 			<Image src={item.image && item.image} alt={item.name} priority width={80} height={80} className={styles.image} />
 			<p className={`${styles.data} ${styles.name}`} onClick={() => router.push(`${item._id}`)}>
 				{item.name}
 			</p>
+			<p className={styles.data}>{item.race}</p>
 			<p className={styles.data}>{item.weight}</p>
-			<p className={styles.data}>{formattedDate}</p>
+			<p className={styles.data}>{formatBirthday(item.birthday)}</p>
 			<p className={styles.data}>{item.owner}</p>
 			<Link href={`https://wa.me/${item.whatsappNumber}`} target='_blank' className={styles.data}>
 				<Image src={wpLogo} alt='Whatsapp Logo' className={styles.wp} /> {item.whatsappNumber}
 			</Link>
 			<QRCode
-				value={userObjetc}
+				value={`https://localhost:3000/${item._id}`}
 				className={`${styles.qr} ${qrClicked ? styles.clicked : ""}`}
 				onClick={handleQrClick}
 			/>

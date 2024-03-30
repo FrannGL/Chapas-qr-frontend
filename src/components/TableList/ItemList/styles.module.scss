@@ -3,7 +3,7 @@
 .body {
 	@include width-height(auto, auto);
 	display: grid;
-	grid-template-columns: repeat(8, 130px);
+	grid-template-columns: repeat(9, 130px);
 	justify-content: center;
 	align-items: center;
 	padding: 10px 20px;

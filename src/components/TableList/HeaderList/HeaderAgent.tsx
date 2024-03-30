@@ -5,6 +5,7 @@ const HeaderAgent = () => {
 		<div className={stylesBody.body}>
 			<p className={stylesBody.data_header}>Avatar</p>
 			<p className={stylesBody.data_header}>Nombre</p>
+			<p className={stylesBody.data_header}>Raza</p>
 			<p className={stylesBody.data_header}>Peso</p>
 			<p className={stylesBody.data_header}>Cumpleaños</p>
 			<p className={stylesBody.data_header}>Dueño</p>

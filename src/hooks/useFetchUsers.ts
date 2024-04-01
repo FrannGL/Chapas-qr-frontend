@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { get } from "@/app/api/route";
+import { GET } from "@/app/api/route";
 import { setUserData } from "@/store/features/userSlice";
 import { useAppDispatch } from "@/store/hooks";
 
@@ -10,7 +10,7 @@ const useFetchUsers = () => {
     const fetchData = useCallback(async () => {
         setLoading(true);
         try {
-            const data = await get("users");
+            const data = await GET("users");
             if (data.statusCode === 200) {
                 dispatch(setUserData(data.payload));
             }

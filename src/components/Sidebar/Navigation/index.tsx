@@ -29,22 +29,22 @@ export const Navigation = ({ isOpen }: any) => {
 				handleAdd();
 			},
 		},
-		{
-			id: 1,
-			title: "Editar usuario",
-			icon: <Pencil />,
-			onClick: () => {
-				handleEdit();
-			},
-		},
-		{
-			id: 2,
-			title: "Eliminar usuario",
-			icon: <Delete />,
-			onClick: () => {
-				handleDelete();
-			},
-		},
+		// {
+		// 	id: 1,
+		// 	title: "Editar usuario",
+		// 	icon: <Pencil />,
+		// 	onClick: () => {
+		// 		handleEdit();
+		// 	},
+		// },
+		// {
+		// 	id: 2,
+		// 	title: "Eliminar usuario",
+		// 	icon: <Delete />,
+		// 	onClick: () => {
+		// 		handleDelete();
+		// 	},
+		// },
 	];
 
 	const handleAdd = () => {

@@ -9,6 +9,7 @@ import { useAppSelector } from "@/store/hooks";
 import { useCloseDropdown } from "@/hooks/useCloseDropdown";
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { formatBirthday } from "@/utils/formatBirtday";
 
 interface FormActionsProps {
 	setShowPopup: (value: SetStateAction<boolean>) => void;
@@ -41,7 +42,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 				race: foundClient.race,
 				image: foundClient.image,
 				weight: foundClient.weight,
-				birthday: foundClient.birthday,
+				birthday: formatBirthday(foundClient.birthday),
 				owner: foundClient.owner,
 				whatsappNumber: foundClient.whatsappNumber,
 			});
@@ -181,7 +182,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 							CANCELAR
 						</button>
 						<button type='submit' className={styles.btn}>
-							CREAR USUARIO
+							{requestType === "POST" ? "CREAR USUARIO" : "EDITAR USUARIO"}
 						</button>
 					</div>
 				</form>

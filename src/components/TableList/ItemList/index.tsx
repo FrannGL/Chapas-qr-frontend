@@ -25,7 +25,7 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 	const router = useRouter();
 
 	useEffect(() => {
-		setQrValue(`https://localhost:3000/${item._id}`);
+		setQrValue(`${process.env.NEXT_PUBLIC_API_CLIENT}/${item._id}`);
 	}, [item._id]);
 
 	const handleEditClick = () => {
@@ -40,6 +40,8 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 		setQrClicked(!qrClicked);
 		setUserId(item._id);
 	};
+
+	console.log(qrValue);
 
 	const handleDownloadQR = () => {
 		const svg = document.getElementById(userId);

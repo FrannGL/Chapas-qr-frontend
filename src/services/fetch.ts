@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = `${process.env.NEXT_PUBLIC_API_BACKEND}/api`
+const API = `${process.env.NEXT_PUBLIC_API_URL}/api`
 
 export async function GET(url: string): Promise <any> {
    try {

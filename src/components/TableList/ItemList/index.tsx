@@ -25,7 +25,7 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 	const router = useRouter();
 
 	useEffect(() => {
-		setQrValue(`${process.env.NEXT_PUBLIC_API_CLIENT}/${item._id}`);
+		setQrValue(`${process.env.NEXT_PUBLIC_API_BASE}/${item._id}`);
 	}, [item._id]);
 
 	const handleEditClick = () => {

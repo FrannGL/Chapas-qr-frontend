@@ -41,8 +41,6 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 		setUserId(item._id);
 	};
 
-	console.log(qrValue);
-
 	const handleDownloadQR = () => {
 		const svg = document.getElementById(userId);
 		if (svg) {

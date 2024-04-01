@@ -5,7 +5,7 @@ import HeaderAgent from "./HeaderList/HeaderAgent";
 import PopupConfirm from "../PopupConfirm";
 import { useState } from "react";
 import { useMessageToast } from "@/hooks/useMessageToast";
-import { remove } from "@/app/api/route";
+import { DELETE } from "@/services/fetch";
 import { UserProps } from "@/typescript/users.interface";
 import FormActions from "../FormActions";
 
@@ -28,7 +28,7 @@ const TableList = ({ data, loading, fetchData }: TableProps) => {
 
 	const handleDeleteUser = async (id: string) => {
 		try {
-			const response = await remove("users", id);
+			const response = await DELETE("users", id);
 			if (response.statusCode === 200) {
 				fetchData();
 			} else {

@@ -1,7 +1,7 @@
 import axios from "axios";
 const API = `${process.env.NEXT_PUBLIC_API_BACKEND}/api`
 
-export async function GET(url: string) {
+export async function GET(url: string): Promise <any> {
    try {
     const res = await fetch(`${API}/${url}`, {
       headers: {
@@ -16,7 +16,7 @@ export async function GET(url: string) {
    }
 };
 
-export async function post(url: string, formData: any) {
+export async function POST(url: string, formData: any): Promise <any>{
   try {
       const res = await axios.post(`${API}/${url}`, formData, {
           headers: {
@@ -30,7 +30,7 @@ export async function post(url: string, formData: any) {
   }
 };
 
-export async function update (url: string,  formData: any, id: string) {
+export async function PUT(url: string,  formData: any, id: string): Promise <any> {
   try {
     const response = await axios.put(`${API}/${url}/${id}`, formData, {
       headers: {
@@ -47,7 +47,7 @@ export async function update (url: string,  formData: any, id: string) {
   }
 };
 
-export async function remove (url: string, id: string) {
+export async function DELETE(url: string, id: string): Promise <any> {
   try {
     const response = await axios.delete(`${API}/${url}/${id}`);
     return response.data;

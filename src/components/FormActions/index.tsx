@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { post, update } from "@/app/api/route";
+import { POST, PUT } from "@/services/fetch";
 import { useMessageToast } from "@/hooks/useMessageToast";
 import useFetchUsers from "@/hooks/useFetchUsers";
 import FileDragDrop from "./FileDragDrop";
@@ -35,7 +35,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 
 	useEffect(() => {
 		if (requestType === "PUT") {
-			const foundClient = users.filter(client => client._id === userId)[0];
+			const foundClient = users.filter((client: UserProps) => client._id === userId)[0];
 			setFormData({
 				_id: foundClient._id,
 				name: foundClient.name,
@@ -73,7 +73,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 
 	const postClient = async () => {
 		try {
-			const response = await post("users", formData);
+			const response = await POST("users", formData);
 			if (response.statusCode === 201) {
 				notify("Usuario creado correctamente");
 				setShowPopup(false);
@@ -99,7 +99,7 @@ const FormActions = ({ setShowPopup, requestType, userId }: FormActionsProps) =>
 	const editClient = async () => {
 		try {
 			if (userId) {
-				const data = await update("users", formData, userId);
+				const data = await PUT("users", formData, userId);
 				if (data.statusCode === 200) {
 					notify("Usuario editado correctamente");
 					setShowPopup(false);

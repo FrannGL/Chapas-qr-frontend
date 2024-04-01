@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { GET } from "@/app/api/route";
+import { GET } from "@/services/fetch";
 import { setUserData } from "@/store/features/userSlice";
 import { useAppDispatch } from "@/store/hooks";
 

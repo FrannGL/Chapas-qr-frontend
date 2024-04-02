@@ -14,7 +14,7 @@ export default function Home() {
 				<HomePage />
 			</MainLayout>
 		) : (
-			router.push("/api/auth/login")
+			<a href='/api/auth/login'>Login</a>
 		)
 	) : null;
 }

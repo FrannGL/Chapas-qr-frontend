@@ -17,6 +17,7 @@ const HomePage = () => {
 			<div className={styles.users}>
 				<Search data={users} setFilteredUsers={setFilteredUsers} />
 				<TableList data={filteredUsers} loading={loading} fetchData={fetchData} />
+				<a href="/api/auth/logout">Logout</a>
 			</div>
 		</section>
 	);

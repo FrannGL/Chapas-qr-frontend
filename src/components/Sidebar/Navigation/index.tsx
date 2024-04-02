@@ -4,12 +4,14 @@ import { useState } from "react";
 import FormActions from "@/components/FormActions";
 import { ButtonProps } from "@/components/Button";
 import Addition from "../../../../public/icons/addition";
-import Delete from "../../../../public/icons/delete";
-import Pencil from "../../../../public/icons/pencil";
+import Logout from "../../../../public/icons/logout";
+import { logout } from "@/store/features/authSlice";
+import { useAppDispatch } from "@/store/hooks";
 
 export const Navigation = ({ isOpen }: any) => {
 	const [addPopup, setAddPopup] = useState(false);
 	const [editPopup, setEditPopup] = useState(false);
+	const dispatch = useAppDispatch();
 
 	const variants = {
 		open: {
@@ -27,6 +29,14 @@ export const Navigation = ({ isOpen }: any) => {
 			icon: <Addition />,
 			onClick: () => {
 				handleAdd();
+			},
+		},
+		{
+			id: 1,
+			title: "Cerrar Sesión",
+			icon: <Logout />,
+			onClick: () => {
+				dispatch(logout());
 			},
 		},
 		// {
@@ -49,22 +59,6 @@ export const Navigation = ({ isOpen }: any) => {
 
 	const handleAdd = () => {
 		setAddPopup(true);
-	};
-
-	const handleEdit = () => {
-		setEditPopup(true);
-	};
-
-	const handleDelete = async () => {
-		console.log("delete");
-	};
-
-	const handleCloseModal = () => {
-		setAddPopup(false);
-	};
-
-	const handleCreate = () => {
-		console.log("create");
 	};
 
 	return (

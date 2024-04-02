@@ -1,20 +1,13 @@
 "use client";
 import MainLayout from "./layout";
 import HomePage from "@/routes/Home";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { useRouter } from "next/navigation";
+import PopupAuth from "@/components/PopupAuth";
+import { useAppSelector } from "@/store/hooks";
 
 export default function Home() {
-	const { user, isLoading } = useUser();
-	const router = useRouter();
+	const auth = useAppSelector(state => state.auth);
 
-	return !isLoading ? (
-		user ? (
-			<MainLayout>
-				<HomePage />
-			</MainLayout>
-		) : (
-			<a href='/api/auth/login'>Login</a>
-		)
-	) : null;
+	if (!auth.email && !auth.password) {
+		return <PopupAuth />;
+	} else return <HomePage />;
 }

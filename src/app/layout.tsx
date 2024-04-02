@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Providers } from "@/store/provider";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 import "@/styles/global.scss";
 
 const roboto = Roboto({ weight: ["100", "300", "500"], subsets: ["latin"], display: "swap" });
@@ -17,9 +18,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<Providers>
-			<html lang='es'>
-				<body className={roboto.className}>{children}</body>
-			</html>
+			<UserProvider>
+				<html lang='es'>
+					<body className={roboto.className}>{children}</body>
+				</html>
+			</UserProvider>
 		</Providers>
 	);
 }

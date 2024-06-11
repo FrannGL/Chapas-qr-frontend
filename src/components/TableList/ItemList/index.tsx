@@ -81,7 +81,7 @@ const ItemList = ({ item, onEdit, onDelete }: ItemListProps) => {
 			<p className={styles.data}>{item.weight}</p>
 			<p className={styles.data}>{formatBirthday(item.birthday)}</p>
 			<p className={styles.data}>{item.owner}</p>
-			<Link href={`https://wa.me/${item.whatsappNumber}`} target='_blank' className={styles.data}>
+			<Link href={`https://wa.me/549${item.whatsappNumber}`} target='_blank' className={styles.data}>
 				<Image src={wpLogo} alt='Whatsapp Logo' className={styles.wp} /> {item.whatsappNumber}
 			</Link>
 			<div ref={qrRef} className={`${qrClicked ? styles.qr_container : ""}`}>
